@@ -1,15 +1,100 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
-    <script src="api_calls.js"></script>
-    <script src="html_handling.js"></script>
-</head>
+	<head>
+		<meta charset="utf-8" />
+		<title> Pokemon Team Builder</title>
+		<script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
+		<script src="api_calls.js"></script>
+		<script src="html_handling.js"></script>
+		<style>
+			.panel {
+				min-width: 49%;
+				height: 890px;
+				max-height: 890px;
+				float: left;
+			}
+			
+			#left-panel {
+				background-color: #ffcccc; 
+				border-right: black solid 5px;
+			}
+			
+			#right-panel {
+				background-color: #ccccff;
 
-<body>
+			}
+			
+			.slot {
+				background-color: white;
+				width: 90%;
+				
+				border: 1px solid black;
+				margin-left: auto; 
+				margin-right: auto; 
+			}
+			
+			.slot:hover {
+				cursor: pointer;
+				background-color: grey;
+			}
+		</style>
+	</head>
 
-</body>
+	<body style = "background-color: #828282;">
+			<div id = "main" style = "margin-left: auto; margin-right: auto; width: 90%; ">
+			<!-- Left Panel-->
+			<div class = "panel" id = "left-panel">
+					<div id = "team" style = "text-align: center; border: 1px solid black; height: 90%;">
+						<h1 style = "margin-left: auto; margin-right: auto;"> Current Team </h1>
+						
+						<table style = "width: 80%; height: 80%; margin-left: auto; margin-right: auto; border: 1px solid black;">
+							<tr>
+								<td>
+									<div id = "pokemon-1" class = "slot">
+										Test
+									<div>
+								</td>
+								<td>
+									<div id = "pokemon-2" class = "slot">
+										Test
+									<div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div id = "pokemon-3" class = "slot">
+										Test
+									<div>
+								</td>
+								<td>
+									<div id = "pokemon-4" class = "slot">
+										Test
+									<div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div id = "pokemon-5" class = "slot">
+										Test
+									<div>
+								</td>
+								<td>
+									<div id = "pokemon-6" class = "slot">
+										Test
+									<div>
+								</td>
+							</tr>
+						</table>
+						
+					</div>
+			</div>
+			
+			<!-- Right Panel-->
+			<div id = "right-panel" class = "panel">
+				
+			</div>
+		</div>
+		
+	</body> 
 </html>
