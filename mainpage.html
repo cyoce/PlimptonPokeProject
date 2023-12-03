@@ -106,8 +106,20 @@
 									<td>
 										Type:
 									</td>
-									<td>
+									<td id = "current-pokemon-type">
 										
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Gender:
+									</td>
+									<td id = "current-pokemon-gender">
+										<select>
+											<option>Male</option>
+											<option>Female</option>
+											<option>Genderless</option>
+										</select>
 									</td>
 								</tr>
 								<tr>
@@ -115,7 +127,7 @@
 										Level:
 									</td>
 									<td>
-										<input type = "number" min = "1" max = "100" size = "5">
+										<input id ="current-pokemon-level" type = "number" min = "1" value= "50" max = "100" size = "5">
 									</td>
 								</tr>
 								<tr>
@@ -192,10 +204,10 @@
 											0
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-hp" type = "number" value = "0" min = "0" max = "256" size = "4">
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-hp" type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
 										<td id =  "total-hp">
 											0
@@ -210,10 +222,10 @@
 											0
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-atk" type = "number" value = "0" min = "0" max = "256" size = "4">
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-hp" type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
 										<td id =  "total-atk">
 											0
@@ -228,10 +240,10 @@
 											0
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-def" type = "number" value = "0" min = "0" max = "256" size = "4">
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-def" type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
 										<td id =  "total-def">
 											0
@@ -246,10 +258,10 @@
 											0
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-spatk" type = "number" value = "0" min = "0" max = "256" size = "4">
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-spatk" type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
 										<td id =  "total-spatk">
 											0
@@ -264,10 +276,10 @@
 											0
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-spdef" type = "number" value = "0" min = "0" max = "256" size = "4">
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-spdef" type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
 										<td id =  "total-spdef">
 											0
@@ -282,13 +294,21 @@
 											0
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-spd" type = "number" value = "0" min = "0" max = "256" size = "4">
 										</td>
 										<td>
-											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-spd" type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
 										<td id =  "total-spd">
 											0
+										</td>
+									</tr>
+									<tr>
+										<td>
+											Remaining EVs
+										</td>
+										<td id = "remaining-evs">
+											510
 										</td>
 									</tr>
 								</table>
