@@ -115,7 +115,6 @@
 
 .menu-button-pressed {
 	background-color: white;
-
 }
 
 .menu-button:hover {
@@ -126,10 +125,12 @@
 .move-information {
 	background-color: white;
 	border: 1px solid black;
-	height: 100%;
-	margin-left: auto; 
-	margin-right: auto; 
+	height: auto;
+	padding-left: 5%;
 	margin-bottom: 3%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
 	width: 90%;
 }
 

@@ -66,7 +66,6 @@
 					<div id = "current-pokemon" style = "">
 						<!-- Top Section -->
 						<div id = "preview">
-
 							<table style = "margin-left: auto; margin-right: auto;">
 								<tr>
 									<td>
@@ -85,13 +84,13 @@
 						<div id = "menu-bar">
 							<table style = "background-color: white;">
 								<tr>
-									<td class = "menu-button" onclick = "openInfoMenu();">
+									<td class = "menu-button" id = "info-menu-button" onclick = "openInfoMenu();">
 										Info
 									</td>
-									<td class = "menu-button" onclick = "openMovesMenu();">
+									<td class = "menu-button" id = "moves-menu-button" onclick = "openMovesMenu();">
 										Moves
 									</td>
-									<td class = "menu-button" onclick = "openStatsMenu();">
+									<td class = "menu-button" id = "stats-menu-button" onclick = "openStatsMenu();">
 										Stats
 									</td>
 								</tr>
@@ -144,16 +143,16 @@
 							<div id = "moves-menu" style = "display: none; margin-top: 3%; height: 600px;">
 								<div id = "current-moves-menu" style = "float: left; margin-left: 3%;">
 									<!-- I imagine the move names are gonna be in these -->
-									<div id = "move-slot-1" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-1")'>
+									<div id = "move-slot-1" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-1");'>
 										Empty
 									</div>
-									<div id = "move-slot-2" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-2")'>
+									<div id = "move-slot-2" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-2");'>
 										Empty
 									</div> 
-									<div id = "move-slot-3" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-3")'>
+									<div id = "move-slot-3" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-3");'>
 										Empty
 									</div >
-									<div id = "move-slot-4" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-4")'>
+									<div id = "move-slot-4" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-4");'>
 										Empty
 									</div>
 								</div>
@@ -172,13 +171,16 @@
 											Stat
 										</td>
 										<td>
-											
+											Base Stat
 										</td>
 										<td>
 											EVs
 										</td>
 										<td>
 											IVs
+										</td>
+										<td>
+											Total
 										</td>
 									</tr>
 									<!-- HP -->
@@ -195,6 +197,9 @@
 										<td>
 											<input type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
+										<td id =  "total-hp">
+											0
+										</td>
 									</tr>
 									<!-- Attack -->
 									<tr>
@@ -209,6 +214,9 @@
 										</td>
 										<td>
 											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+										<td id =  "total-atk">
+											0
 										</td>
 									</tr>
 									<!-- Defense -->
@@ -225,6 +233,9 @@
 										<td>
 											<input type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
+										<td id =  "total-def">
+											0
+										</td>
 									</tr>
 									<!-- Special Attack -->
 									<tr>
@@ -239,6 +250,9 @@
 										</td>
 										<td>
 											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+										<td id =  "total-spatk">
+											0
 										</td>
 									</tr>
 									<!-- Special Defense -->
@@ -255,6 +269,9 @@
 										<td>
 											<input type = "number" value = "0" min = "0" max = "31" size = "3">
 										</td>
+										<td id =  "total-spdef">
+											0
+										</td>
 									</tr>
 									<!-- Speed -->
 									<tr>
@@ -269,6 +286,9 @@
 										</td>
 										<td>
 											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+										<td id =  "total-spd">
+											0
 										</td>
 									</tr>
 								</table>
