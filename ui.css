@@ -1,0 +1,139 @@
+#current-pokemon {
+	background-color: white; 
+	border: black solid 1px; 
+	height: 80%;
+	margin-left: auto; 
+	margin-right: auto; 
+	width: 80%; 
+}
+
+#current-pokemon-menu {
+	display: none;
+	text-align: center;
+	
+}
+
+#info-menu {
+	display: none;
+}
+#left-panel {
+	background-color: #ffcccc; 
+}
+
+#main {
+	margin-left: auto; 
+	margin-right: auto; 
+	width: 90%;
+}
+
+#move-list {
+	border: solid black 1px;
+	float: left; 
+	margin-left: 5%; 
+	width: 55%;
+}
+
+#move-list-menu {
+	height: 275px; 
+	overflow-x: visible;
+	overflow-y: scroll;
+}
+
+#preview {
+	border-bottom: black solid 1px;
+}
+
+#right-panel {
+	background-color: #ccccff;
+}
+
+#team {
+	border: 1px solid black; 
+	height: 90%;
+	text-align: center; 	
+}
+
+#team-grid {
+	border: 1px solid black;
+	height: 80%; 
+	margin-left: auto; 
+	margin-right: auto; 
+	width: 80%; 
+}
+
+.back {
+	background-color: white;	
+	border: solid black 1px; 
+	float: left; 
+	margin-left: 5px; 	
+}
+
+.back:hover {
+	background-color: grey;	
+	cursor: pointer;
+}
+
+.panel {
+	min-width: 49%;
+	height: 890px;
+	max-height: 890px;
+	
+}
+
+.slot {
+	background-color: white;
+	width: 90%;
+	height: 150px;
+	border: 1px solid black;
+	margin-left: auto; 
+	margin-right: auto; 
+}
+
+.slot:hover {
+	cursor: pointer;
+	background-color: grey;
+}
+
+.menu-button {
+	background-color: white;
+	border-right: black solid 1px; 
+	border-bottom: black solid 1px;
+}
+
+.move-slot {
+	background-color: white;
+	width: 300px;
+	height: 75px;
+	border: 1px solid black;
+	margin-bottom: 3%;
+}
+
+.move-slot:hover {
+	cursor: pointer;
+	background-color: grey;
+}
+
+.menu-button-pressed {
+	background-color: white;
+
+}
+
+.menu-button:hover {
+	cursor: pointer;
+	background-color: grey;
+}
+
+.move-information {
+	background-color: white;
+	border: 1px solid black;
+	height: 100%;
+	margin-left: auto; 
+	margin-right: auto; 
+	margin-bottom: 3%;
+	width: 90%;
+}
+
+.move-information:hover {
+	cursor: pointer;
+	background-color: grey;
+}

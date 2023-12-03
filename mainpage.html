@@ -7,94 +7,276 @@
 		<script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
 		<script src="api_calls.js"></script>
 		<script src="html_handling.js"></script>
-		<style>
-			.panel {
-				min-width: 49%;
-				height: 890px;
-				max-height: 890px;
-				float: left;
-			}
-			
-			#left-panel {
-				background-color: #ffcccc; 
-				border-right: black solid 5px;
-			}
-			
-			#right-panel {
-				background-color: #ccccff;
-
-			}
-			
-			.slot {
-				background-color: white;
-				width: 90%;
-				
-				border: 1px solid black;
-				margin-left: auto; 
-				margin-right: auto; 
-			}
-			
-			.slot:hover {
-				cursor: pointer;
-				background-color: grey;
-			}
-		</style>
+		<script src="menucontrol.js"></script>
+		<link rel = "stylesheet" href = "ui.css">
 	</head>
-
-	<body style = "background-color: #828282;">
-			<div id = "main" style = "margin-left: auto; margin-right: auto; width: 90%; ">
+ 
+	<body style = "background-color: #828282;" onload = "onLoad();">
+		<div id = "main">
 			<!-- Left Panel-->
 			<div class = "panel" id = "left-panel">
-					<div id = "team" style = "text-align: center; border: 1px solid black; height: 90%;">
-						<h1 style = "margin-left: auto; margin-right: auto;"> Current Team </h1>
-						
-						<table style = "width: 80%; height: 80%; margin-left: auto; margin-right: auto; border: 1px solid black;">
-							<tr>
-								<td>
-									<div id = "pokemon-1" class = "slot">
-										Test
-									<div>
-								</td>
-								<td>
-									<div id = "pokemon-2" class = "slot">
-										Test
-									<div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div id = "pokemon-3" class = "slot">
-										Test
-									<div>
-								</td>
-								<td>
-									<div id = "pokemon-4" class = "slot">
-										Test
-									<div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div id = "pokemon-5" class = "slot">
-										Test
-									<div>
-								</td>
-								<td>
-									<div id = "pokemon-6" class = "slot">
-										Test
-									<div>
-								</td>
-							</tr>
-						</table>
-						
-					</div>
-			</div>
-			
-			<!-- Right Panel-->
-			<div id = "right-panel" class = "panel">
-				
-			</div>
-		</div>
+				<!-- Team Menu -->
+				<div id = "team">
+					<h1 style = "margin-left: auto; margin-right: auto;"> Current Team </h1>
+					
+					<table id = "team-grid">
+						<tr>
+							<td>
+								<div id = "pokemon-1" class = "slot" onclick = 'chooseTeamSlot("pokemon-1")'>
+									Empty
+								</div>
+							</td>
+							<td>
+								<div id = "pokemon-2" class = "slot" onclick = 'chooseTeamSlot("pokemon-2")'>
+									Empty
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id = "pokemon-3" class = "slot" onclick = 'chooseTeamSlot("pokemon-3")'>
+									Empty
+								</div>
+							</td>
+							<td>
+								<div id = "pokemon-4" class = "slot" onclick = 'chooseTeamSlot("pokemon-4")'>
+									Empty
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id = "pokemon-5" class = "slot" onclick = 'chooseTeamSlot("pokemon-5")'>
+									Empty
+								</div>
+							</td>
+							<td>
+								<div id = "pokemon-6" class = "slot" onclick = 'chooseTeamSlot("pokemon-6")'>
+									Empty
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
 		
+				<!-- Current Pokemon Menu -->
+				<div id = "current-pokemon-menu">
+					<p class = "back" onclick = "goBack();"> back </p>
+					<h1> Selected Pokemon </h1>
+					<div id = "current-pokemon" style = "">
+						<!-- Top Section -->
+						<div id = "preview">
+
+							<table style = "margin-left: auto; margin-right: auto;">
+								<tr>
+									<td>
+										Species:
+									</td>
+									<td>
+										<select id = "pokemon-list">
+											
+										</select>
+									</td>
+								</tr>
+							</table>			
+						</div>
+						
+						<!-- Middle Section -->
+						<div id = "menu-bar">
+							<table style = "background-color: white;">
+								<tr>
+									<td class = "menu-button" onclick = "openInfoMenu();">
+										Info
+									</td>
+									<td class = "menu-button" onclick = "openMovesMenu();">
+										Moves
+									</td>
+									<td class = "menu-button" onclick = "openStatsMenu();">
+										Stats
+									</td>
+								</tr>
+							</table>
+						</div>
+					
+						<!-- Bottom Section -->
+						<div id = "menu" style = "background-color: white;">
+							<!-- Info Menu -->
+							<div id = "info-menu">
+								<table style = "margin-left: auto; margin-right: auto;">
+								<tr>
+									<td>
+										Type:
+									</td>
+									<td>
+										
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Level:
+									</td>
+									<td>
+										<input type = "number" min = "1" max = "100" size = "5">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Ability:
+									</td>
+									<td id = "current-pokemon-abilities-select">
+										<select>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Item:
+									</td>
+									<td id = "current-pokemon-items-select">
+										<select>
+										</select>
+									</td>
+								</tr>
+							</table>	
+							</div>
+							
+							<!-- Moves Menu -->
+							<div id = "moves-menu" style = "display: none; margin-top: 3%; height: 600px;">
+								<div id = "current-moves-menu" style = "float: left; margin-left: 3%;">
+									<!-- I imagine the move names are gonna be in these -->
+									<div id = "move-slot-1" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-1")'>
+										Empty
+									</div>
+									<div id = "move-slot-2" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-2")'>
+										Empty
+									</div> 
+									<div id = "move-slot-3" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-3")'>
+										Empty
+									</div >
+									<div id = "move-slot-4" class = "move-slot" onclick = 'setCurrentMoveSlot("move-slot-4")'>
+										Empty
+									</div>
+								</div>
+								<div id = "move-list">
+									<h2>Move List</h2>
+									<div id = "move-list-menu">
+									</div>
+								</div>
+							</div>
+							
+							<!-- Stats Menu -->
+							<div id = "stats-menu">
+								<table>
+									<tr>
+										<td>
+											Stat
+										</td>
+										<td>
+											
+										</td>
+										<td>
+											EVs
+										</td>
+										<td>
+											IVs
+										</td>
+									</tr>
+									<!-- HP -->
+									<tr>
+										<td>
+											HP
+										</td>
+										<td id = "base-hp">
+											0
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+									</tr>
+									<!-- Attack -->
+									<tr>
+										<td>
+											Attack
+										</td>
+										<td id = "base-atk">
+											0
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+									</tr>
+									<!-- Defense -->
+									<tr>
+										<td>
+											Defense
+										</td>
+										<td id = "base-def">
+											0
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+									</tr>
+									<!-- Special Attack -->
+									<tr>
+										<td>
+											Special Attack
+										</td>
+										<td id = "base-spatk">
+											0
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+									</tr>
+									<!-- Special Defense -->
+									<tr>
+										<td>
+											Special Defense
+										</td>
+										<td id = "base-spdef">
+											0
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+									</tr>
+									<!-- Speed -->
+									<tr>
+										<td>
+											Speed
+										</td>
+										<td id = "base-spd">
+											0
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "256" size = "4">
+										</td>
+										<td>
+											<input type = "number" value = "0" min = "0" max = "31" size = "3">
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
 	</body> 
 </html>
