@@ -17,7 +17,7 @@
 	display: none;
 }
 #left-panel {
-	background-color: #ffcccc; 
+	background-color: #f10808; 
 }
 
 #main {
@@ -69,7 +69,7 @@
 }
 
 .back:hover {
-	background-color: grey;	
+	background-color: rgb(128, 128, 128);	
 	cursor: pointer;
 }
 
