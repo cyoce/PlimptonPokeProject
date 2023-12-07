@@ -12,7 +12,6 @@
 #current-pokemon-menu {
 	display: none;
 	text-align: center;
-
 }
 
 #info-menu {
@@ -22,6 +21,7 @@
 #left-panel {
 	background-color: #ce3131;
 	border: outset #bc2949 5px;
+	border-radius: 20px;
 }
 
 #main {
