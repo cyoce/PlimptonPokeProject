@@ -1,23 +1,27 @@
 #current-pokemon {
 	background-color: white; 
-	border: black solid 1px; 
-	height: 80%;
+	border: outset #ddb8c0 3px;
+	border-radius: 5px;
+	height: 90%;
 	margin-left: auto; 
 	margin-right: auto; 
 	width: 80%; 
+	overflow: auto;
 }
 
 #current-pokemon-menu {
 	display: none;
 	text-align: center;
-	
+
 }
 
 #info-menu {
 	display: none;
 }
+
 #left-panel {
-	background-color: #f10808; 
+	background-color: #ce3131;
+	border: outset #bc2949 5px;
 }
 
 #main {
@@ -33,6 +37,11 @@
 	width: 55%;
 }
 
+#moves-menu {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #move-list-menu {
 	height: 275px; 
 	overflow-x: visible;
@@ -43,19 +52,13 @@
 	border-bottom: black solid 1px;
 }
 
-#right-panel {
-	background-color: #ccccff;
-}
-
 #team {
-	border: 1px solid black; 
 	height: 90%;
 	text-align: center; 	
 }
 
 #team-grid {
-	border: 1px solid black;
-	height: 80%; 
+	height: 95%; 
 	margin-left: auto; 
 	margin-right: auto; 
 	width: 80%; 
@@ -63,34 +66,38 @@
 
 .back {
 	background-color: white;	
-	border: solid black 1px; 
+	border: outset #ddb8c0 3px;
+	border-radius: 20px;
 	float: left; 
+	width: 50px;
 	margin-left: 5px; 	
 }
 
 .back:hover {
 	background-color: rgb(128, 128, 128);	
+	border: outset black 3px;
 	cursor: pointer;
 }
 
 .panel {
 	min-width: 49%;
-	height: 890px;
-	max-height: 890px;
-	
+	height: 850px;
+	max-height: 850px;
 }
 
 .slot {
 	background-color: white;
 	width: 90%;
 	height: 150px;
-	border: 1px solid black;
+	border: 3px outset #ddb8c0;
+	border-radius: 20px;
 	margin-left: auto; 
 	margin-right: auto; 
 }
 
 .slot:hover {
 	cursor: pointer;
+	border: outset black 3px;
 	background-color: grey;
 }
 
