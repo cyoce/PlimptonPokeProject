@@ -16,7 +16,11 @@ class Pokemon {
                 iv: null
             };
         });
-        this.level = 0;
+        this.level = 50;
+        this.name = object.name[0].toUpperCase() + object.name.substring(1);
+        this.id = object.id;
+        this.abilities = object.abilities.map(ability => ability.ability);
+
     }
 
     getStat(name) {

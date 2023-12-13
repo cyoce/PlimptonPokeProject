@@ -7,8 +7,11 @@ var statsMenuButtonElement;
 var teamElement;
 var currentPokemonMenuElement;
 var currentPokemonSelectedElement;
+var currentPokemonSlotIndex;
 var currentMoveSlotElement;
 var currentMoveList;
+
+var currentTeam = new Array(6);
 
 // Initializing variables once the page loads
 function onLoad() {
@@ -22,6 +25,32 @@ function onLoad() {
 	teamElement = document.getElementById("team");
 	currentPokemonMenuElement = document.getElementById("current-pokemon-menu");
 	currentMoveList = document.getElementById("move-list-menu");
+
+	buildPokeDropdowns();
+}
+
+async function createPokemon(event){
+	const Poke = new Pokedex.Pokedex();
+	const id = event.target.value;
+	const rawPokemon = await Poke.getPokemon(id);
+	const pokemon = new Pokemon(rawPokemon);
+	console.log(pokemon.name);
+	currentTeam[currentPokemonSlotIndex] = pokemon;
+}
+
+function setPokemonLevel(event){
+	currentTeam[currentPokemonSlotIndex].level = event.target.value;
+}
+
+async function buildPokeDropdowns(){
+	const template = document.getElementById("t-poke-dropdown");
+    for(const el of document.querySelectorAll(".poke-dropdown")){
+        const clone = template.content.cloneNode(true);
+        el.appendChild(clone);
+		el.addEventListener("change", (event) => {
+
+		});
+    }
 }
 
 // Choosing a Pokemon Slot in the Current Team UI
@@ -34,6 +63,7 @@ function chooseTeamSlot(slot) {
 	
 	// Save user's selected slot
 	currentPokemonSelectedElement = document.getElementById(slot);
+	currentPokemonSlotIndex = +slot[8] - 1;
 	
 	openInfoMenu();
 	
@@ -48,8 +78,23 @@ function goBack() {
 	// Show Team Menu
 	currentPokemonMenuElement.style.display = "none";
 	
+	const pokemon = currentTeam[currentPokemonSlotIndex];
+	currentPokemonSelectedElement.innerText = pokemon ? `Level ${pokemon.level} ${pokemon.name}` : "Empty";
+
 	// Remove user's selected slot
 	currentPokemonSelectedElement = "";
+}
+
+// populate ability dropdown based on current pokemon
+function generateAbilities(pokemon){
+	
+	const abilitySelector = document.querySelector("#current-pokemon-abilities-select select");
+	abilitySelector.innerHTML = "";
+	if(pokemon){
+		for(const ability of pokemon.abilities){
+			abilitySelector.innerHTML += /*html*/`<option value="${ability.name}">${ability.name}</option>`;
+		}
+	}
 }
 
 // Show the info menu and hide the other menus
@@ -60,6 +105,12 @@ function openInfoMenu() {
 	infoMenuButtonElement.style.borderBottomWidth = "0px";
 	movesMenuButtonElement.style.borderBottomWidth = "1px";
 	statsMenuButtonElement.style.borderBottomWidth = "1px";
+
+	// populate menu from pokemon object
+	const pokemon = currentTeam[currentPokemonSlotIndex];
+	document.getElementById("pokemonPicker").value = pokemon ? pokemon.id : "empty";
+	document.getElementById("current-pokemon-level").value = pokemon ? 50 : pokemon.level;
+	generateAbilities(pokemon);
 }
 
 // Show the moves menu and hide the other menus
