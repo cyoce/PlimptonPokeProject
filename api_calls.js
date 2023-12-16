@@ -7,9 +7,9 @@ console.log("api calls");
 })();
 
 class Pokemon {
-    constructor(object) {
+    constructor(raw) {
         this.stats = {};
-        object.stats.forEach(stat => {
+        raw.stats.forEach(stat => {
             this.stats[stat.stat.name] = {
                 base: stat.base_stat,
                 ev: null,
@@ -17,10 +17,11 @@ class Pokemon {
             };
         });
         this.level = 50;
-        this.name = object.name[0].toUpperCase() + object.name.substring(1);
-        this.id = object.id;
-        this.abilities = object.abilities.map(ability => ability.ability);
-
+        this.name = raw.name[0].toUpperCase() + raw.name.substring(1);
+        this.id = raw.id;
+        this.abilities = raw.abilities.map(wrapper => wrapper.ability);
+        this.items = raw.held_items.map(wrapper => wrapper.item);
+        this.gender = "Genderless";
     }
 
     getStat(name) {
