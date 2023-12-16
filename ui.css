@@ -40,10 +40,12 @@
 #moves-menu {
 	margin-left: auto;
 	margin-right: auto;
+	overflow-x: visible;
+	overflow-y: scroll;
 }
 
 #move-list-menu {
-	height: 275px; 
+	height: 500px; 
 	overflow-x: visible;
 	overflow-y: scroll;
 }
@@ -82,7 +84,7 @@
 .panel {
 	min-width: 49%;
 	height: 850px;
-	max-height: 850px;
+	
 }
 
 .slot {
@@ -110,7 +112,7 @@
 .move-slot {
 	background-color: white;
 	width: 300px;
-	height: 75px;
+	height: auto;
 	border: 1px solid black;
 	margin-bottom: 3%;
 }
