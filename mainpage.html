@@ -116,10 +116,10 @@
 										Gender:
 									</td>
 									<td id = "current-pokemon-gender">
-										<select>
-											<option>Male</option>
-											<option>Female</option>
-											<option>Genderless</option>
+										<select onchange="updateVar('gender', event)">
+											<option value="Genderless">Genderless</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
 										</select>
 									</td>
 								</tr>
@@ -136,7 +136,7 @@
 										Ability:
 									</td>
 									<td id = "current-pokemon-abilities-select">
-										<select>
+										<select onchange="updateVar('ability', event)">
 										</select>
 									</td>
 								</tr>
@@ -145,7 +145,7 @@
 										Item:
 									</td>
 									<td id = "current-pokemon-items-select">
-										<select>
+										<select onchange="updateVar('item', event)">
 										</select>
 									</td>
 								</tr>

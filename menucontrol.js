@@ -34,8 +34,8 @@ async function createPokemon(event){
 	const id = event.target.value;
 	const rawPokemon = await Poke.getPokemon(id);
 	const pokemon = new Pokemon(rawPokemon);
-	console.log(pokemon.name);
 	currentTeam[currentPokemonSlotIndex] = pokemon;
+	generateInfo(pokemon);
 }
 
 function setPokemonLevel(event){
@@ -47,9 +47,6 @@ async function buildPokeDropdowns(){
     for(const el of document.querySelectorAll(".poke-dropdown")){
         const clone = template.content.cloneNode(true);
         el.appendChild(clone);
-		el.addEventListener("change", (event) => {
-
-		});
     }
 }
 
@@ -86,15 +83,33 @@ function goBack() {
 }
 
 // populate ability dropdown based on current pokemon
-function generateAbilities(pokemon){
+function generateInfo(pokemon){
+	buildDropdown(pokemon, 'abilities', 'name', 'ability', "#current-pokemon-abilities-select select");
+	buildDropdown(pokemon, 'items', 'name', 'item', "#current-pokemon-items-select select");
+	document.querySelector("#current-pokemon-gender select").value = pokemon?.gender || "Genderless";
+}
+
+function buildDropdown(pokemon, prop1, prop2, target, selector){
 	
-	const abilitySelector = document.querySelector("#current-pokemon-abilities-select select");
-	abilitySelector.innerHTML = "";
-	if(pokemon){
-		for(const ability of pokemon.abilities){
-			abilitySelector.innerHTML += /*html*/`<option value="${ability.name}">${ability.name}</option>`;
+	const dropdown = document.querySelector(selector);
+	dropdown.innerHTML = "";
+	const array = pokemon?.[prop1];
+	if(array?.length){
+		dropdown.innerHTML += /*html*/`<option disabled hidden selected>(select)</option>`;
+		for(const name of array.map(el => el[prop2])){
+			dropdown.innerHTML += /*html*/`<option value="${name}">${name}</option>`;
 		}
 	}
+	const value = pokemon?.[target];
+	if(value){
+		dropdown.value = value;
+	}
+}
+
+function updateVar(prop, event){
+	console.log(prop);
+	const pokemon = currentTeam[currentPokemonSlotIndex];
+	pokemon[prop] = event.target.value;
 }
 
 // Show the info menu and hide the other menus
@@ -109,8 +124,8 @@ function openInfoMenu() {
 	// populate menu from pokemon object
 	const pokemon = currentTeam[currentPokemonSlotIndex];
 	document.getElementById("pokemonPicker").value = pokemon ? pokemon.id : "empty";
-	document.getElementById("current-pokemon-level").value = pokemon ? 50 : pokemon.level;
-	generateAbilities(pokemon);
+	document.getElementById("current-pokemon-level").value = pokemon ? pokemon.level : 50;
+	generateInfo(pokemon);
 }
 
 // Show the moves menu and hide the other menus
