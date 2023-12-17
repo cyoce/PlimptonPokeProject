@@ -151,6 +151,26 @@ function openStatsMenu() {
 	infoMenuButtonElement.style.borderBottomWidth = "1px";
 	movesMenuButtonElement.style.borderBottomWidth = "1px";
 	statsMenuButtonElement.style.borderBottomWidth = "0px";
+
+	generateStats();
+}
+
+function generateStats(){
+	let remainingEV = 510;
+	for(const [name, data] of Object.entries(currentPoke.stats)){
+		document.getElementById(`base-${name}`).innerText = data.base;
+		document.getElementById(`total-${name}`).innerText = currentPoke.getStat(name);
+		document.getElementById(`ivs-${name}`).value = data.iv;
+		document.getElementById(`evs-${name}`).value = data.ev;
+		remainingEV -= data.ev;
+	}
+	document.getElementById("remaining-evs").innerText = remainingEV;
+}
+
+function updateSV(event){
+	const input = event.target;
+	currentPoke.stats[input.id.substring(4)][input.id.substring(0,2)] = +input.value;
+	generateStats();
 }
 
 function generateMoves(){

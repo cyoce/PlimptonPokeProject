@@ -3,7 +3,7 @@ console.log("api calls");
     const Poke = new Pokedex.Pokedex();
     const snorlax = await Poke.getPokemonByName("snorlax");
     window.snorlax = snorlax;
-    console.log(`Snorlax HP: ${snorlax.stats.find(stat => stat.stat.name == "hp").base_stat}`);
+    console.log(`Snorlax HP: ${snorlax.stats.find(stat => stat.stat.name === "hp").base_stat}`);
 })();
 
 const propHandler = {
@@ -11,7 +11,6 @@ const propHandler = {
         return object => object[name];
     }
 };
-
 const $prop = new Proxy({}, propHandler);
 
 class Pokemon {
@@ -31,6 +30,7 @@ class Pokemon {
         this.items = raw.held_items.map($prop.item);
         this.gender = "Genderless";
         this.rawMoves = raw.moves || [];
+        this.nature = 10;
     }
 
     async getMoveset(){
@@ -51,8 +51,8 @@ class Pokemon {
 
     getStat(name) {
         const s = this.stats[name];
-        const fl = (num, denom = 1) => Math.floor(num / denom);
-        return fl(fl((2 * s.base + s.iv + fl(s.ev, 4), 100 / this.level) + 5) * this.nature);
+        const fl = (num, denom) => Math.floor(num / (denom || 1));
+        return fl((fl(2 * s.base + s.iv + fl(s.ev, 4), 100 / this.level) + 5) * this.nature);
     }
 
     setEV(name, val) {

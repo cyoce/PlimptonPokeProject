@@ -204,10 +204,10 @@
 											0
 										</td>
 										<td>
-											<input id = "evs-hp" type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-hp" type = "number" value = "0" min = "0" max = "256" size = "4" onchange="updateSV(event)">
 										</td>
 										<td>
-											<input id = "ivs-hp" type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-hp" type = "number" value = "0" min = "0" max = "31" size = "3" onchange="updateSV(event)">
 										</td>
 										<td id =  "total-hp">
 											0
@@ -218,16 +218,16 @@
 										<td>
 											Attack
 										</td>
-										<td id = "base-atk">
+										<td id = "base-attack">
 											0
 										</td>
 										<td>
-											<input id = "evs-atk" type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-attack" type = "number" value = "0" min = "0" max = "256" size = "4" onchange="updateSV(event)">
 										</td>
 										<td>
-											<input id = "ivs-hp" type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-attack" type = "number" value = "0" min = "0" max = "31" size = "3" onchange="updateSV(event)">
 										</td>
-										<td id =  "total-atk">
+										<td id =  "total-attack">
 											0
 										</td>
 									</tr>
@@ -236,16 +236,16 @@
 										<td>
 											Defense
 										</td>
-										<td id = "base-def">
+										<td id = "base-defense">
 											0
 										</td>
 										<td>
-											<input id = "evs-def" type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-defense" type = "number" value = "0" min = "0" max = "256" size = "4" onchange="updateSV(event)">
 										</td>
 										<td>
-											<input id = "ivs-def" type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-defense" type = "number" value = "0" min = "0" max = "31" size = "3" onchange="updateSV(event)">
 										</td>
-										<td id =  "total-def">
+										<td id =  "total-defense">
 											0
 										</td>
 									</tr>
@@ -254,16 +254,16 @@
 										<td>
 											Special Attack
 										</td>
-										<td id = "base-spatk">
+										<td id = "base-special-attack">
 											0
 										</td>
 										<td>
-											<input id = "evs-spatk" type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-special-attack" type = "number" value = "0" min = "0" max = "256" size = "4" onchange="updateSV(event)">
 										</td>
 										<td>
-											<input id = "ivs-spatk" type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-special-attack" type = "number" value = "0" min = "0" max = "31" size = "3" onchange="updateSV(event)">
 										</td>
-										<td id =  "total-spatk">
+										<td id =  "total-special-attack">
 											0
 										</td>
 									</tr>
@@ -272,16 +272,16 @@
 										<td>
 											Special Defense
 										</td>
-										<td id = "base-spdef">
+										<td id = "base-special-defense">
 											0
 										</td>
 										<td>
-											<input id = "evs-spdef" type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-special-defense" type = "number" value = "0" min = "0" max = "256" size = "4" onchange="updateSV(event)">
 										</td>
 										<td>
-											<input id = "ivs-spdef" type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-special-defense" type = "number" value = "0" min = "0" max = "31" size = "3" onchange="updateSV(event)">
 										</td>
-										<td id =  "total-spdef">
+										<td id =  "total-special-defense">
 											0
 										</td>
 									</tr>
@@ -290,16 +290,16 @@
 										<td>
 											Speed
 										</td>
-										<td id = "base-spd">
+										<td id = "base-speed">
 											0
 										</td>
 										<td>
-											<input id = "evs-spd" type = "number" value = "0" min = "0" max = "256" size = "4">
+											<input id = "evs-speed" type = "number" value = "0" min = "0" max = "256" size = "4" onchange="updateSV(event)">
 										</td>
 										<td>
-											<input id = "ivs-spd" type = "number" value = "0" min = "0" max = "31" size = "3">
+											<input id = "ivs-speed" type = "number" value = "0" min = "0" max = "31" size = "3" onchange="updateSV(event)">
 										</td>
-										<td id =  "total-spd">
+										<td id =  "total-speed">
 											0
 										</td>
 									</tr>
