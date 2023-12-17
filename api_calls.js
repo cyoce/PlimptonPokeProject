@@ -30,7 +30,7 @@ class Pokemon {
         this.items = raw.held_items.map($prop.item);
         this.gender = "Genderless";
         this.rawMoves = raw.moves || [];
-        this.nature = 10;
+        this.nature = 1;
     }
 
     async getMoveset(){
