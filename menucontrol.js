@@ -10,6 +10,10 @@ var currentPokemonSelectedElement;
 var currentPokemonSlotIndex;
 var currentMoveSlotElement;
 var currentMoveList;
+var PokeAPI;
+
+window.__defineGetter__("currentPoke", () => currentTeam[currentPokemonSlotIndex]);
+window.__defineSetter__("currentPoke", (val) => currentTeam[currentPokemonSlotIndex] = val);
 
 var currentTeam = new Array(6);
 
@@ -30,16 +34,17 @@ function onLoad() {
 }
 
 async function createPokemon(event){
-	const Poke = new Pokedex.Pokedex();
+	PokeAPI = new Pokedex.Pokedex();
 	const id = event.target.value;
-	const rawPokemon = await Poke.getPokemon(id);
-	const pokemon = new Pokemon(rawPokemon);
-	currentTeam[currentPokemonSlotIndex] = pokemon;
-	generateInfo(pokemon);
+	const rawPokemon = await PokeAPI.getPokemon(id);
+	currentPoke = new Pokemon(rawPokemon);
+	generateInfo();
+	await currentPoke.getMoveset();
+	generateMoves();
 }
 
 function setPokemonLevel(event){
-	currentTeam[currentPokemonSlotIndex].level = event.target.value;
+	currentPoke.level = event.target.value;
 }
 
 async function buildPokeDropdowns(){
@@ -74,42 +79,39 @@ function goBack() {
 	
 	// Show Team Menu
 	currentPokemonMenuElement.style.display = "none";
-	
-	const pokemon = currentTeam[currentPokemonSlotIndex];
-	currentPokemonSelectedElement.innerText = pokemon ? `Level ${pokemon.level} ${pokemon.name}` : "Empty";
+	currentPokemonSelectedElement.innerText = currentPoke ? `Level ${currentPoke.level} ${currentPoke.name}` : "Empty";
 
 	// Remove user's selected slot
 	currentPokemonSelectedElement = "";
 }
 
-// populate ability dropdown based on current pokemon
-function generateInfo(pokemon){
-	buildDropdown(pokemon, 'abilities', 'name', 'ability', "#current-pokemon-abilities-select select");
-	buildDropdown(pokemon, 'items', 'name', 'item', "#current-pokemon-items-select select");
-	document.querySelector("#current-pokemon-gender select").value = pokemon?.gender || "Genderless";
+// populate info fields based on current pokemon
+function generateInfo(){
+	buildDropdown('abilities', 'name', 'ability', "#current-pokemon-abilities-select select");
+	buildDropdown('items', 'name', 'item', "#current-pokemon-items-select select");
+	document.querySelector("#current-pokemon-gender select").value = currentPoke?.gender || "Genderless";
 }
 
-function buildDropdown(pokemon, prop1, prop2, target, selector){
+// build options for a dropdown based on the pokemon's properties and target attribute
+function buildDropdown(prop1, prop2, target, selector){
 	
 	const dropdown = document.querySelector(selector);
 	dropdown.innerHTML = "";
-	const array = pokemon?.[prop1];
+	const array = currentPoke?.[prop1];
 	if(array?.length){
 		dropdown.innerHTML += /*html*/`<option disabled hidden selected>(select)</option>`;
-		for(const name of array.map(el => el[prop2])){
+		for(const name of array.map($prop[prop2])){
 			dropdown.innerHTML += /*html*/`<option value="${name}">${name}</option>`;
 		}
 	}
-	const value = pokemon?.[target];
+	const value = currentPoke?.[target];
 	if(value){
 		dropdown.value = value;
 	}
 }
 
 function updateVar(prop, event){
-	console.log(prop);
-	const pokemon = currentTeam[currentPokemonSlotIndex];
-	pokemon[prop] = event.target.value;
+	currentPoke[prop] = event.target.value;
 }
 
 // Show the info menu and hide the other menus
@@ -122,10 +124,9 @@ function openInfoMenu() {
 	statsMenuButtonElement.style.borderBottomWidth = "1px";
 
 	// populate menu from pokemon object
-	const pokemon = currentTeam[currentPokemonSlotIndex];
-	document.getElementById("pokemonPicker").value = pokemon ? pokemon.id : "empty";
-	document.getElementById("current-pokemon-level").value = pokemon ? pokemon.level : 50;
-	generateInfo(pokemon);
+	document.getElementById("pokemonPicker").value = currentPoke ? currentPoke.id : "empty";
+	document.getElementById("current-pokemon-level").value = currentPoke ? currentPoke.level : 50;
+	generateInfo();
 }
 
 // Show the moves menu and hide the other menus
@@ -136,6 +137,10 @@ function openMovesMenu() {
 	infoMenuButtonElement.style.borderBottomWidth = "1px";
 	movesMenuButtonElement.style.borderBottomWidth = "0px";
 	statsMenuButtonElement.style.borderBottomWidth = "1px";
+
+	currentMoveList.innerHTML = "";
+
+	generateMoves();
 }
 
 // Show the stats menu and hide the other menus
@@ -148,6 +153,22 @@ function openStatsMenu() {
 	statsMenuButtonElement.style.borderBottomWidth = "0px";
 }
 
+function generateMoves(){
+	let moveArray = undefined;
+	if(currentPoke){
+		for(const move of currentPoke.moveset){
+			addMove(move);
+		}
+		moveArray = currentPoke.moves;
+	} else {
+		moveArray = Array(4).fill("Empty");
+	}
+
+	for(const [i, name] of moveArray.entries()){
+		document.getElementById(`move-slot-${i+1}`).innerHTML = name;
+	}
+}
+
 // Set current move slot
 function setCurrentMoveSlot(slot) {
 	currentMoveSlotElement = document.getElementById(slot);
@@ -155,7 +176,10 @@ function setCurrentMoveSlot(slot) {
 
 // Add a move
 function addMove(name, type, basePower, category, description) {
-	
+	if(!type){
+		let move = name;
+		name = move.name, type = move.type, basePower = move.basePower, category = move.category, description = move.description;
+	}
 	// Create the div element
 	let moveSlotInformationElement = document.createElement("div");
 	
@@ -232,22 +256,24 @@ function addMove(name, type, basePower, category, description) {
 
 // Set move name 
 function equipMove(slot) {
-	// If user selected a slot
+// If user selected a slot
 	if (currentMoveSlotElement) {
 		// Get selected slot
 		let chosenMove = document.getElementById(slot);
 		
-		if (currentMoveSlotElement.innerText != "Empty") {
-			let moveName = currentMoveSlotElement.firstChild.id.substr(0, currentMoveSlotElement.firstChild.id.length-5);
-			console.log(moveName);
-			addMove(moveName, document.getElementById(moveName + "-type").innerText, document.getElementById(moveName + "-basepower").innerText, document.getElementById(moveName + "-category").innerText, document.getElementById(moveName + "-description").innerText);
-		}
+		// if (currentMoveSlotElement.innerText != "Empty") {
+		// 	let moveName = currentMoveSlotElement.firstChild.id.substr(0, currentMoveSlotElement.firstChild.id.length-5);
+		// 	console.log(moveName);
+		// 	addMove(moveName, document.getElementById(moveName + "-type").innerText, document.getElementById(moveName + "-basepower").innerText, document.getElementById(moveName + "-category").innerText, document.getElementById(moveName + "-description").innerText);
+		// }
 
 		// Set selected slots HTMl to chosen move's HTML
-		currentMoveSlotElement.innerHTML = chosenMove.innerHTML;
-		
+		currentMoveSlotElement.innerHTML = slot;
+
+		currentPoke.moves[currentMoveSlotElement.id[10]-1] = slot;
+
 		// Remove item from list
-		currentMoveList.removeChild(chosenMove);
+		// currentMoveList.removeChild(chosenMove);
 	} else {
 		alert("Select a move slot!");
 	}
